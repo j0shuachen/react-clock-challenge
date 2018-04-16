@@ -1,7 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-
-
+import Clock from './clock';
 
 
 class Root extends React.Component {
@@ -9,6 +8,7 @@ class Root extends React.Component {
     return(
       <div>
         React is up and running!
+        <Clock/>
       </div>
     );
   }
