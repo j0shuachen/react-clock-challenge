@@ -20013,16 +20013,24 @@ var Clock = function (_React$Component) {
 
     _this.state = {
       hrs: 0,
-      mins: 0
+      mins: 0,
+      secs: 0
     };
     _this.setUp = _this.setUp.bind(_this);
+    _this.tick = _this.tick.bind(_this);
+
     return _this;
   }
 
   _createClass(Clock, [{
     key: 'componentDidMount',
     value: function componentDidMount() {
+      var _this2 = this;
+
       this.setUp();
+      setInterval(function () {
+        return _this2.tick();
+      }, 1000);
     }
   }, {
     key: 'setUp',
@@ -20030,13 +20038,32 @@ var Clock = function (_React$Component) {
       var time = new Date();
       var hrs = time.getHours();
       var mins = time.getMinutes();
-      this.setState({ hrs: hrs, mins: mins });
+      var secs = time.getSeconds();
+      this.setState({ hrs: hrs, mins: mins, secs: secs });
     }
   }, {
     key: 'tick',
     value: function tick() {
       var hrs = this.state.hrs;
       var mins = this.state.mins;
+      var secs = this.state.secs;
+
+      if (secs < 59) {
+        secs += 1;
+      } else {
+        secs = 0;
+        if (mins < 59) {
+          mins += 1;
+        } else {
+          mins = 0;
+          if (hrs < 23) {
+            hrs += 1;
+          } else {
+            hrs = 0;
+          }
+        }
+      }
+      this.setState({ hrs: hrs, mins: mins, secs: secs });
     }
   }, {
     key: 'render',
