@@ -1,1 +1,43 @@
+html, #main, body, .vcs-initialized, .container{
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+  font-family: 'Black Han Sans', sans-serif;
 
+}
+
+div {
+  display: flex;
+}
+
+.clock-holder, .title{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.title {
+  letter-spacing: 5px;
+  font-weight: bold;
+  margin: 30px 0 10px 0;
+  font-size: xx-large;
+
+}
+
+.clock-holder {
+  margin-top: 50px;
+  width: fit-content;
+  align-self: center;
+  background: black;
+  color: white;
+  box-sizing: border-box;
+  padding: 20px;
+}
+
+.hrs, .mins, .secs, .colon, .ampm {
+  font-size: xx-large;
+}
+
+.ampm, .colon {
+  margin: 0 3px;
+}

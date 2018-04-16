@@ -84,9 +84,12 @@ class Clock extends React.Component {
       <div className='clock-holder'>
 
         <div className='hrs'>{this.prettify(this.adjustHrs(this.state.hrs))}</div>
+        <div className='colon'>:</div>
         <div className='mins'>{this.prettify(this.state.mins)}</div>
+        <div className='colon'>:</div>
         <div className='secs'>{this.prettify(this.state.secs)}</div>
-        <div className='secs'>{this.state.ampm}</div>
+        <div className='colon'></div>
+        <div className='ampm'>{this.state.ampm}</div>
 
       </div>
     );

@@ -10895,8 +10895,12 @@ var Root = function (_React$Component) {
     value: function render() {
       return _react2.default.createElement(
         'div',
-        null,
-        'React is up and running!',
+        { className: 'container' },
+        _react2.default.createElement(
+          'div',
+          { className: 'title' },
+          'JOSH\'S CLOCK'
+        ),
         _react2.default.createElement(_clock2.default, null)
       );
     }
@@ -20107,17 +20111,28 @@ var Clock = function (_React$Component) {
         ),
         _react2.default.createElement(
           'div',
+          { className: 'colon' },
+          ':'
+        ),
+        _react2.default.createElement(
+          'div',
           { className: 'mins' },
           this.prettify(this.state.mins)
+        ),
+        _react2.default.createElement(
+          'div',
+          { className: 'colon' },
+          ':'
         ),
         _react2.default.createElement(
           'div',
           { className: 'secs' },
           this.prettify(this.state.secs)
         ),
+        _react2.default.createElement('div', { className: 'colon' }),
         _react2.default.createElement(
           'div',
-          { className: 'secs' },
+          { className: 'ampm' },
           this.state.ampm
         )
       );

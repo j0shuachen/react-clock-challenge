@@ -6,8 +6,8 @@ import Clock from './clock';
 class Root extends React.Component {
   render() {
     return(
-      <div>
-        React is up and running!
+      <div className='container'>
+        <div className='title'>JOSH'S CLOCK</div>
         <Clock/>
       </div>
     );
