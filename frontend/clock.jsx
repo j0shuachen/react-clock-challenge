@@ -7,10 +7,13 @@ class Clock extends React.Component {
     this.state = {
       hrs: 0,
       mins: 0,
-      secs: 0
+      secs: 0,
+      ampm: ''
     };
     this.setUp = this.setUp.bind(this);
     this.tick = this.tick.bind(this);
+    this.prettify = this.prettify.bind(this);
+    this.adjustHrs = this.adjustHrs.bind(this);
 
   }
 
@@ -25,7 +28,8 @@ class Clock extends React.Component {
     let hrs = time.getHours();
     let mins = time.getMinutes();
     let secs = time.getSeconds();
-    this.setState({hrs, mins, secs});
+    let ampm = hrs >= 12 ? 'pm' : 'am';
+    this.setState({hrs, mins, secs, ampm});
   }
 
   tick(){
@@ -48,14 +52,41 @@ class Clock extends React.Component {
         }
       }
     }
-    this.setState({hrs, mins, secs});
+    let ampm = hrs >= 12 ? 'pm' : 'am';
+    this.setState({hrs, mins, secs, ampm});
+  }
+
+  prettify(time){
+    if(time < 10){
+      return `0${time}`;
+    }else{
+      return `${time}`;
+    }
+  }
+
+  adjustHrs(hr){
+    if(hr === 23 || hr === 0){
+      return `${12}`;
+    }
+    if(hr > 12){
+      let pretty = hr - 12;
+      return `${hr - 12}`;
+    }else{
+      return `${hr}`;
+    }
+
   }
 
   render() {
     console.log(this.state);
-
+    let time = this.state;
     return(
       <div className='clock-holder'>
+
+        <div className='hrs'>{this.prettify(this.adjustHrs(this.state.hrs))}</div>
+        <div className='mins'>{this.prettify(this.state.mins)}</div>
+        <div className='secs'>{this.prettify(this.state.secs)}</div>
+        <div className='secs'>{this.state.ampm}</div>
 
       </div>
     );

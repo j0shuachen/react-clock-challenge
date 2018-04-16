@@ -20014,10 +20014,13 @@ var Clock = function (_React$Component) {
     _this.state = {
       hrs: 0,
       mins: 0,
-      secs: 0
+      secs: 0,
+      ampm: ''
     };
     _this.setUp = _this.setUp.bind(_this);
     _this.tick = _this.tick.bind(_this);
+    _this.prettify = _this.prettify.bind(_this);
+    _this.adjustHrs = _this.adjustHrs.bind(_this);
 
     return _this;
   }
@@ -20039,7 +20042,8 @@ var Clock = function (_React$Component) {
       var hrs = time.getHours();
       var mins = time.getMinutes();
       var secs = time.getSeconds();
-      this.setState({ hrs: hrs, mins: mins, secs: secs });
+      var ampm = hrs >= 12 ? 'pm' : 'am';
+      this.setState({ hrs: hrs, mins: mins, secs: secs, ampm: ampm });
     }
   }, {
     key: 'tick',
@@ -20063,14 +20067,60 @@ var Clock = function (_React$Component) {
           }
         }
       }
-      this.setState({ hrs: hrs, mins: mins, secs: secs });
+      var ampm = hrs >= 12 ? 'pm' : 'am';
+      this.setState({ hrs: hrs, mins: mins, secs: secs, ampm: ampm });
+    }
+  }, {
+    key: 'prettify',
+    value: function prettify(time) {
+      if (time < 10) {
+        return '0' + time;
+      } else {
+        return '' + time;
+      }
+    }
+  }, {
+    key: 'adjustHrs',
+    value: function adjustHrs(hr) {
+      if (hr === 23 || hr === 0) {
+        return '' + 12;
+      }
+      if (hr > 12) {
+        var pretty = hr - 12;
+        return '' + (hr - 12);
+      } else {
+        return '' + hr;
+      }
     }
   }, {
     key: 'render',
     value: function render() {
       console.log(this.state);
-
-      return _react2.default.createElement('div', { className: 'clock-holder' });
+      var time = this.state;
+      return _react2.default.createElement(
+        'div',
+        { className: 'clock-holder' },
+        _react2.default.createElement(
+          'div',
+          { className: 'hrs' },
+          this.prettify(this.adjustHrs(this.state.hrs))
+        ),
+        _react2.default.createElement(
+          'div',
+          { className: 'mins' },
+          this.prettify(this.state.mins)
+        ),
+        _react2.default.createElement(
+          'div',
+          { className: 'secs' },
+          this.prettify(this.state.secs)
+        ),
+        _react2.default.createElement(
+          'div',
+          { className: 'secs' },
+          this.state.ampm
+        )
+      );
     }
   }]);
 
